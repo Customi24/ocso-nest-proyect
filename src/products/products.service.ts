@@ -12,7 +12,7 @@ export class ProductsService {
     @InjectRepository(Product)
     private productRepository:  Repository<Product>
   ){}
-  private products: CreateProductDto[] = [
+  /*private products: CreateProductDto[] = [
     {
       productId: uuid(),
       productName: "Takis Guacamole 240g",
@@ -35,14 +35,19 @@ export class ProductsService {
       provider: uuid(),
     }
   ]
-
+*/
   create(createProductDto: CreateProductDto) {
     const product = this.productRepository.save(createProductDto)
     return product;
   }
 
   findAll() {
-    return this.productRepository.find();
+    return this.productRepository.find(/*{
+      loadEagerRelations: true,
+      relations:{
+        provider: true,
+      }
+    }*/);
   }
 
   findOne(id: string) {
@@ -54,9 +59,11 @@ export class ProductsService {
   }
 
   findByProvider(id: string){
-    const productsFound = this.products.filter((product) => product.provider == id) 
+    /*const productsFound = this.products.filter((product) => product.provider == id) 
     if (productsFound.length == 0) throw new NotFoundException()
     return productsFound;
+    */
+   return "OK"
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
