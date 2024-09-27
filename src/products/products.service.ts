@@ -63,7 +63,12 @@ export class ProductsService {
     if (productsFound.length == 0) throw new NotFoundException()
     return productsFound;
     */
-   return "OK"
+   return this.productRepository.findBy({
+      provider:{
+        providerId: id,
+      }
+   })
+   
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
