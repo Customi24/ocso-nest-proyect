@@ -1,2 +1,2 @@
-export const JWT_KEY = 'SECRET_KEY';
-export const EXPIRES_IN = '3600s'; 
+export const JWT_KEY = 'GJRASJD!#@$!@#R#FGFDS!@#R$#!#@!#';
+export const EXPIRES_IN = '1800s'; 
