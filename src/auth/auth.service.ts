@@ -6,6 +6,7 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
 import { LoginUserDto } from "./dto/login-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
 
 
 @Injectable()
@@ -37,4 +38,14 @@ export class AuthService {
     const token = this.jwtService.sign(payload);
     return token;
   }
+
+  async updateUser(userEmail: string, updateUserDTO: UpdateUserDto){
+    const newUserData = await this.userRepository.preload({
+      userEmail,
+      ...updateUserDTO
+    })
+    this.userRepository.save(newUserData)
+    return newUserData
+  }
+
 }

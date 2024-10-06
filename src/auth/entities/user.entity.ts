@@ -6,7 +6,9 @@ import { Employee } from "src/employees/entities/employee.entity";
 export class User{
     @PrimaryGeneratedColumn('uuid')
     userId: string;
-    @Column('text')
+    @Column('text',{
+        unique: true,
+    })
     userEmail: string;
     @Column('text')
     userPassword: string;
