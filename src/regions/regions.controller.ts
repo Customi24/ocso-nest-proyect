@@ -5,7 +5,10 @@ import { UpdateRegionDto } from './dto/update-region.dto';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { ROLES } from 'src/auth/constants/roles.constans';
 import { authPlugins } from 'mysql2';
+import { ApiAuth } from 'src/auth/decorators/api.decorator';
 
+
+@ApiAuth()
 @Controller('regions')
 export class RegionsController {
   constructor(private readonly regionsService: RegionsService) {}

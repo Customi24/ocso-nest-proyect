@@ -7,8 +7,10 @@ import { User } from 'src/auth/entities/user.entity';
 import { UserData } from 'src/auth/decorators/user.decorator';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { ROLES } from 'src/auth/constants/roles.constans';
+import { ApiAuth } from 'src/auth/decorators/api.decorator';
 
 
+@ApiAuth()
 @UseGuards(AuthGuard)
 @Controller('providers')
 export class ProvidersController {
