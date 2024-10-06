@@ -13,7 +13,7 @@ import { ApiAuth } from 'src/auth/decorators/api.decorator';
 
 
 @ApiAuth()
-@ApiTags("Locations")
+@ApiTags("Employees")
 @Controller('employees')
 export class EmployeesController {
   constructor(private readonly employeesService: EmployeesService) {}
