@@ -53,7 +53,7 @@ export class EmployeesService {
       employeeId: id
     })
     return{
-      message: ""
+      message: "Employee deleted"
     }
   }
 

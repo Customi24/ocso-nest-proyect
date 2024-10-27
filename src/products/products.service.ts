@@ -59,10 +59,6 @@ export class ProductsService {
   }
 
   findByProvider(id: string){
-    /*const productsFound = this.products.filter((product) => product.provider == id) 
-    if (productsFound.length == 0) throw new NotFoundException()
-    return productsFound;
-    */
    return this.productRepository.findBy({
       provider:{
         providerId: id,
@@ -78,7 +74,7 @@ export class ProductsService {
     })
     if (!productToUpdate) throw new NotFoundException()
     this.productRepository.save(productToUpdate);
-    return productToUpdate
+    return productToUpdate;
   }
 
   remove(id: string) {
@@ -87,7 +83,7 @@ export class ProductsService {
       productId: id,
     })
     return {
-      message: "objeto con id ${id} eliminado"
+      message: `objeto con id ${id} eliminado`
     }
   }
 
