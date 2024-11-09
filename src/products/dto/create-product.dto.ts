@@ -24,7 +24,6 @@ export class CreateProductDto extends Product {
 
     @ApiProperty()
     @IsString()
-    @IsObject() 
-    provider: Provider;
+    provider: Provider | string;
 
 }

@@ -5,8 +5,6 @@ import { UpdateEmployeeDto } from './dto/update-employee.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { ROLES } from 'src/auth/constants/roles.constans';
-import { Manager } from 'src/managers/entities/manager.entity';
-import { get } from 'http';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Employee } from './entities/employee.entity';
 import { ApiAuth } from 'src/auth/decorators/api.decorator';
@@ -14,7 +12,7 @@ import { ApiAuth } from 'src/auth/decorators/api.decorator';
 
 @ApiAuth()
 @ApiTags("Employees")
-@Controller('employees')
+@Controller("employees")
 export class EmployeesController {
   constructor(private readonly employeesService: EmployeesService) {}
 
@@ -60,7 +58,7 @@ export class EmployeesController {
   @Auth(ROLES.MANAGER)
   @Get('/location/:id')
   findAllLocation(@Param('id') id: string) {
-    return this.employeesService,this.findAllLocation(id);
+    return this.employeesService.findByLocation(+id);
   }
 
 

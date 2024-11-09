@@ -38,7 +38,6 @@ export class ProvidersController {
   @Auth(ROLES.EMPLOYEE, ROLES.MANAGER)
   @Get()
   findAll(@UserData() user: User) {
-    if (!user.userRoles.includes("Employee")) throw new UnauthorizedException("Acceso denegado, solo Administradores y Managers");
     return this.providersService.findAll();
   }
 

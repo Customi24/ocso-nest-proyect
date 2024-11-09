@@ -20,8 +20,8 @@ export class AuthController {
   }
   
   @Post('login')
-  login(@Body() loginUserDto :LoginUserDto, @Res({passthrough: true}) response: Response, @Cookies() cookies: any){
-    const token = this.authService.loginUser(loginUserDto)
+  async login(@Body() loginUserDto :LoginUserDto, @Res({passthrough: true}) response: Response, @Cookies() cookies: any){
+    const token = await this.authService.loginUser(loginUserDto)
     let expireDate = new Date()
     expireDate.setDate(expireDate.getDay() + 7)
     response.cookie(TOKEN_NAME, token,{
@@ -32,7 +32,7 @@ export class AuthController {
       maxAge: 1000 * 60 * 60 * 24 * 7,
     });
 
-    return;
+    return token;
   }
 
   @Patch("/:email")
