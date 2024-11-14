@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { BadRequestException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { User } from "./entities/user.entity";
 import { Repository } from "typeorm";
@@ -21,6 +21,10 @@ export class AuthService {
   ) {}
 
   async registerEmployee(id: string, createUserDto: CreateUserDto) {
+    const roles = createUserDto.userRoles
+    if (roles.includes("Admin") || roles.includes("Manager")) {
+      throw new BadRequestException("Invalid")
+    }
     createUserDto.userPassword = bcrypt.hashSync(createUserDto.userPassword, 5);
     const user = await this.userRepository.save(createUserDto);
     const employee = await this.employeeRepository.preload({
