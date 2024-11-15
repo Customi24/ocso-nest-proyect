@@ -35,6 +35,10 @@ export class AuthService {
   }
 
   async registerManager(id: string, createUserDto: CreateUserDto) {
+    const roles = createUserDto.userRoles
+    if (roles.includes("Admin") || roles.includes("Employee")) {
+      throw new BadRequestException("Invalid")
+    }
     createUserDto.userPassword = bcrypt.hashSync(createUserDto.userPassword, 5);
     const user = await this.userRepository.save(createUserDto);
     const manager = await this.managerRepository.preload({
@@ -65,9 +69,10 @@ export class AuthService {
     return token;
   }
 
-  async updateUser(userEmail: string, updateUserDTO: UpdateUserDto){
+  async updateUser(id: string, updateUserDTO: UpdateUserDto){
+    updateUserDTO.userPassword = bcrypt.hashSync(updateUserDTO.userPassword, 5);
     const newUserData = await this.userRepository.preload({
-      userEmail,
+      userId: id,
       ...updateUserDTO
     })
     this.userRepository.save(newUserData)
