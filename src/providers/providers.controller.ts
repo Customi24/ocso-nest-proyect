@@ -58,6 +58,7 @@ export class ProvidersController {
   @Auth( ROLES.MANAGER)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProviderDto: UpdateProviderDto) {
+    console.log(updateProviderDto)
     return this.providersService.update(id, updateProviderDto);
   }
 

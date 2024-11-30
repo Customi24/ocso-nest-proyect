@@ -36,8 +36,10 @@ export class ManagersController {
 
   @Auth()
   @Get()
-  findAll() {
-    return this.managersService.findAll();
+  async findAll() {
+    const managers = await this.managersService.findAll();
+    console.log(managers); 
+    return managers
   }
 
   @Auth()

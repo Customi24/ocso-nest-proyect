@@ -42,9 +42,10 @@ export class ProvidersService {
   }
 
   async update(id: string, updateProviderDto: UpdateProviderDto) {
+
     const product = await this.providerRepository.preload({
       providerId: id,
-      ...UpdateProviderDto
+      ...updateProviderDto
       
     })
     return this.providerRepository.save(product);
